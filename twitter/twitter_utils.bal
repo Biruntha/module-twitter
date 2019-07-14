@@ -64,6 +64,6 @@ function constructRequestHeaders(http:Request request, string httpMethod, string
 }
 
 function setResponseError(json jsonResponse) returns error {
-    error err = error(TWITTER_ERROR_CODE, { message: jsonResponse.errors[0].message.toString() });
+    error err = error(TWITTER_ERROR_CODE, message = jsonResponse.errors[0].message.toString());
     return err;
 }

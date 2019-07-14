@@ -35,7 +35,7 @@ TwitterConfiguration twitterConfig = {
 
 Client twitterClient = new(twitterConfig);
 
-@test:Config
+@test:Config {}
 function testTweet() {
     io:println("--------------Calling tweet----------------");
     time:Time time = time:currentTime();
@@ -45,7 +45,7 @@ function testTweet() {
     var tweetResponse = twitterClient->tweet(status);
 
     if (tweetResponse is Status) {
-        tweetId = untaint tweetResponse.id;
+        tweetId = <@untainted> tweetResponse.id;
         test:assertTrue(tweetResponse.text.contains(status), msg = "Failed to call tweet()");
     } else {
         test:assertFail(msg = <string>tweetResponse.detail().message);
@@ -80,7 +80,7 @@ function testUnReTweet() {
     }
 }
 
-@test:Config
+@test:Config {}
 function testSearch() {
     io:println("--------------Calling search----------------");
     string queryStr = "twitter";
@@ -124,7 +124,7 @@ function testDestroyStatus() {
     }
 }
 
-@test:Config
+@test:Config {}
 function testGetClosestTrendLocations() {
     io:println("--------------Calling getClosestTrendLocations----------------");
     float latitude = 34.0;
@@ -138,7 +138,7 @@ function testGetClosestTrendLocations() {
     }
 }
 
-@test:Config
+@test:Config {}
 function testGetTopTrendsByPlace() {
     io:println("--------------Calling getTopTrendsByPlace----------------");
     int locationId = 23424922;

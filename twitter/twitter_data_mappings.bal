@@ -19,7 +19,7 @@ function convertToStatus(json jsonStatus) returns Status {
     status.createdAt = jsonStatus.created_at != null ? jsonStatus.created_at.toString() : "";
     status.id = jsonStatus.id != null ? convertToInt(jsonStatus.id) : 0;
     status.text = jsonStatus.text != null ? jsonStatus.text.toString() : "";
-    status.source = jsonStatus.source != null ? jsonStatus.source.toString() : "";
+    status["source"] = jsonStatus["source"] != null ? jsonStatus["source"].toString() : "";
     status.truncated = jsonStatus.truncated != null ? convertToBoolean(jsonStatus.truncated) : false;
     status.inReplyToStatusId = jsonStatus.in_reply_to_status_id != null
                                     ? convertToInt(jsonStatus.in_reply_to_status_id) : 0;
@@ -39,7 +39,7 @@ function convertToInt(json jsonVal) returns int {
         if (intVal is int) {
             return intVal;
         } else {
-            error err = error(TWITTER_ERROR_CODE, { message: "Error occurred when converting " + stringVal + " to int"});
+            error err = error(TWITTER_ERROR_CODE, message = "Error occurred when converting " + stringVal + " to int");
             panic err;
         }
     } else {
@@ -58,7 +58,7 @@ function convertToFloat(json jsonVal) returns float {
     if (floatVal is float) {
         return floatVal;
     } else {
-        error err = error(TWITTER_ERROR_CODE, { message: "Error occurred when converting " + stringVal + " to float"});
+        error err = error(TWITTER_ERROR_CODE, message = "Error occurred when converting " + stringVal + " to float");
         panic err;
     }
 }
